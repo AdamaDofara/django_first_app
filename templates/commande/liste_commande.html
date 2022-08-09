@@ -1,0 +1,50 @@
+{% extends 'template.html' %}
+{% block contenu %}
+<div class="container">
+   <div class="row justify-content-center">
+    <div class="col-5"> <h1>La liste des commandes</h1></div>
+   </div>
+</div>
+  <br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+  			{% csrf_token %}
+		    <button class="btn btn-primary" type="submit">Rechercher</button>
+				{{myFiltre.form}}
+		  </form>
+		</div>
+	</div>
+
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Client</th>
+					<th>Produit</th>
+					<th>Categorie</th>
+					<th>Date de Commande</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+				{% for commande in commandes %}
+					<tr>
+						<td>{{commande.client}}</td>
+						<td>{{commande.produit}}</td>
+						<td>RAS</td>
+						<td>{{commande.date_creation}}</td>
+						<td>{{commande.status}}</td>
+						<td><a href="modification_commande/{{commande.id}}" class="btn btn-outline-primary">Modifier</a> 	<a href="{% url 'supprimer_commande' commande.id %}" class="btn btn-outline-danger">Supprimer</a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'template.html' %}
+{% block contenu %}
+{% load static %}
+<br>
+<div class="row">
+	<div class="col-md-5">
+		<h5>Ajout de produit</h5>
+		<hr>
+		{%if messages %}
+			<div class="alert alert-success">
+				{% for message in messages %}
+					<li>{{message}}</li>
+				{% endfor %}
+			</div>
+		{% endif %}
+		{% if form.errors %}
+			<div class="alert alert-danger">
+				{{form.errors}}
+			</div>
+		{% endif %}
+		<hr>
+		<div class="row justify-content-center">	
+			<div class="col-5">
+				<form action="" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{form.as_p}}
+					<input class="btn btn-primary" type="submit" value="Envoyer">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-7">
+		<h5>Les produits</h5>
+		<form method="get">
+			{% csrf_token %}
+		  <button class="btn btn-primary" type="submit">Rechercher</button>
+			  {{filtre.form}}
+		</form>
+		<hr>
+		<div class="card card-body">
+			<div class="card card-body">
+				<table class="table table-sm">
+					<tr>
+						<th>Id</th>
+						<th>Image</th>
+						<th>Nom</th>
+						<th>Prix</th>
+						<th>Actions</th>
+					</tr>
+					{% for produit in produits %}
+						<tr>
+							<td>{{produit.id}}</td>
+							{% if produit.photo %}
+								<td><img src="{{produit.photo.url}}" alt="image" style="width:50px; heigth:50px"></td>
+							{% else %}
+								<td><img src="media/images/noimage.jpg" alt="image" style="width:50px; heigth:50px"></td>
+							{% endif %}
+							<td>{{produit.nom}}</td>
+							<td>{{produit.prix}}</td>
+							<td><a href="" class="btn btn-outline-primary">Modifier</a> 	<a href="" class="btn btn-outline-danger">Supprimer</a></td>
+						</tr>
+					{% endfor %}
+	
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

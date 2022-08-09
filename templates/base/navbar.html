@@ -1,0 +1,19 @@
+{% load static %}
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="notre logo" srcset="" style="height:30px; width:30px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+            <a class="nav-link" href="/produit">Produits</a>
+            <a class="nav-link" href="/client">Clients</a>
+            <a class="nav-link" href="/commande">Commandes</a>
+          </div>
+        </div>
+      </div>
+      <span>Salut, {{request.user }}</span>
+       <span><a href="{% url 'deconnexion' %}" class="btn btn-danger">Déconnexion</a></span>
+    </nav>
